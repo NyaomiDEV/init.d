@@ -1,0 +1,13 @@
+#!/sbin/openrc-run
+
+name=$RC_SVCNAME
+description="Snapcast server"
+supervisor="supervise-daemon"
+command="/usr/bin/snapserver"
+command_args="--logging.sink=system --server.datadir=/var/lib/snapserver $SNAPSERVER_OPTS"
+command_user="snapserver:snapserver"
+
+depend() {
+	need net
+	use avahi-daemon 
+}

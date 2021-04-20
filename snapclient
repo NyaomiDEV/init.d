@@ -1,0 +1,13 @@
+#!/sbin/openrc-run
+
+name=$RC_SVCNAME
+description="Snapcast client"
+supervisor="supervise-daemon"
+command="/usr/bin/snapclient"
+command_args="--logsink=system $SNAPCLIENT_OPTS"
+command_user="snapclient:snapclient"
+
+depend() {
+	need net
+	use avahi-daemon
+}
