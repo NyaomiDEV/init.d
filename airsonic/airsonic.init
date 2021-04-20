@@ -1,0 +1,17 @@
+#!/usr/bin/openrc-run
+# Copyright 1999-2015 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+# $Id$
+
+supervisor=supervise-daemon
+command="/usr/bin/java"
+command_args="$JAVA_OPTS -Dairsonic.home=${AIRSONIC_HOME} -Dserver.context-path=${CONTEXT_PATH} -Dserver.port=${PORT} -jar ${JAVA_JAR} $JAVA_ARGS"
+
+description="Airsonic Server"
+respawn_delay=5
+
+command_user=airsonic:airsonic
+
+depend() {
+	need net;
+}
