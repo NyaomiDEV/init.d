@@ -1,0 +1,20 @@
+#!/usr/bin/openrc-run
+# Copyright 1999-2015 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+# $Id$
+
+supervisor=supervise-daemon
+command="/usr/bin/dotnet"
+command_args="/usr/lib/jellyfin/jellyfin.dll --datadir ${JELLYFIN_DATA_DIRECTORY} --cachedir ${JELLYFIN_CACHE_DIRECTORY} ${JELLYFIN_ADD_OPTS}"
+description="Jellyfin Server"
+respawn_delay=5
+
+command_user=jellyfin:jellyfin
+
+depend() {
+	need net;
+}
+
+start_pre() {
+	chmod 775 /run/media/naomi
+}
